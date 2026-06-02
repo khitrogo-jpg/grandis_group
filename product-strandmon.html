@@ -6,7 +6,7 @@
 <title>Кресло STRANDMON Premium | GRANDIS GROUP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2 family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-color: #0d0d0d;
@@ -16,6 +16,7 @@
     --border-color: rgba(212, 175, 55, 0.15);
     --gold: #d4af37;
     --toggle-btn-bg: #1a1a1a;
+    --tab-active-bg: rgba(212, 175, 55, 0.1);
   }
 
   [data-theme="light"] {
@@ -26,6 +27,7 @@
     --border-color: rgba(26, 26, 26, 0.1);
     --gold: #b38f1d;
     --toggle-btn-bg: #eaeaea;
+    --tab-active-bg: rgba(179, 143, 29, 0.1);
   }
 
   * {
@@ -65,11 +67,13 @@
     gap: 5px;
   }
 
+  .back-link:hover { opacity: 0.8; }
+
   .theme-toggle {
     background: var(--toggle-btn-bg);
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    padding: 8px 16px;
+    padding: 8px 18px;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -100,14 +104,14 @@
     border: 1px solid var(--border-color);
     overflow: hidden;
     position: relative;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
   }
 
   .main-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: opacity 0.3s ease-in-out;
   }
 
   /* Правая сторона: Инфо */
@@ -138,31 +142,31 @@
   .meta-status-row {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     margin-bottom: 25px;
   }
 
   .price {
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 700;
   }
 
   .stock-status {
-    font-size: 12px;
+    font-size: 11px;
     color: #2ec4b6;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     background: rgba(46, 196, 182, 0.1);
-    padding: 4px 10px;
+    padding: 6px 14px;
     border-radius: 4px;
   }
 
   /* Селектор Цвета */
   .color-selector-section {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     padding: 20px 0;
     border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
   }
 
   .section-label {
@@ -170,7 +174,7 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-weight: 600;
   }
 
@@ -180,8 +184,8 @@
   }
 
   .color-dot-btn {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
@@ -206,49 +210,63 @@
     background: inherit;
   }
 
-  .desc-text {
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--text-muted);
-    margin-bottom: 30px;
-  }
-
-  /* Выпадающие характеристики (Улучшение) */
-  .specs-accordion {
+  /* Мощное улучшение: Интерактивные вкладки (Табы) */
+  .tabs-container {
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    margin-bottom: 35px;
     background: var(--panel-bg);
+    margin-bottom: 35px;
+    overflow: hidden;
   }
 
-  .specs-trigger {
-    padding: 15px 20px;
-    font-size: 12px;
+  .tabs-nav {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 15px 10px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 600;
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
+    transition: all 0.2s ease;
+    text-align: center;
   }
 
-  .specs-content {
-    padding: 0 20px 20px 20px;
+  .tab-btn.active {
+    color: var(--gold);
+    background: var(--tab-active-bg);
+    font-weight: 700;
+    box-shadow: inset 0 -2px 0 var(--gold);
+  }
+
+  .tab-panel {
+    padding: 22px;
     display: none;
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 1.7;
     color: var(--text-muted);
-    line-height: 1.6;
-    border-top: 1px solid var(--border-color);
-    padding-top: 15px;
   }
 
-  .specs-content p {
-    margin-bottom: 6px;
+  .tab-panel.active {
+    display: block;
   }
 
-  /* Премиум кнопка действия */
+  .tab-panel p {
+    margin-bottom: 8px;
+  }
+  .tab-panel p strong {
+    color: var(--text-main);
+  }
+
+  /* Премиум кнопка заказа */
   .order-btn {
     width: 100%;
     max-width: 380px;
@@ -262,13 +280,15 @@
     letter-spacing: 2px;
     cursor: pointer;
     border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
   }
 
   .order-btn:hover {
     background: transparent;
     color: var(--gold);
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
   }
 
   @media (max-width: 900px) {
@@ -279,8 +299,10 @@
     }
     .gallery-side { max-width: 100%; }
     .main-image-wrapper { height: 420px; }
-    .title { font-size: 30px; }
+    .title { font-size: 32px; }
     .order-btn { max-width: 100%; }
+    .tabs-nav { flex-direction: row; }
+    .tab-btn { font-size: 9px; padding: 12px 5px; }
   }
 </style>
 </head>
@@ -288,18 +310,16 @@
 
 <div class="top-control-bar">
   <a href="index.html" class="back-link">&larr; В КАТАЛОГ</a>
-  <button class="theme-toggle" onclick="toggleTheme()">Режим</button>
+  <button class="theme-toggle" onclick="toggleTheme()">Сменить режим</button>
 </div>
 
 <div class="product-container">
-  <!-- Левая сторона: Галерея -->
   <div class="gallery-side">
     <div class="main-image-wrapper">
       <img id="productMainImg" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800" alt="STRANDMON">
     </div>
   </div>
   
-  <!-- Правая сторона: Детали -->
   <div class="info-side">
     <div class="brand-tag">IKEA Premium Collection</div>
     <h1 class="title">Кресло STRANDMON</h1>
@@ -309,87 +329,29 @@
       <div class="stock-status">● В наличии (Минск)</div>
     </div>
     
-    <!-- Переключатель цветов -->
     <div class="color-selector-section">
       <div class="section-label">Выберите цвет обивки:</div>
       <div class="color-options">
-        <!-- Желтый -->
         <button class="color-dot-btn active" style="background: #e5b842;" onclick="changeColor('yellow', this)"></button>
-        <!-- Темно-серый -->
         <button class="color-dot-btn" style="background: #3a3f47;" onclick="changeColor('grey', this)"></button>
-        <!-- Премиальный Изумруд -->
         <button class="color-dot-btn" style="background: #1c3b32;" onclick="changeColor('emerald', this)"></button>
       </div>
     </div>
 
-    <p class="desc-text">
-      Настоящая классика шведского дизайна в эксклюзивном премиальном прочтении GRANDIS GROUP. Высокая закругленная спинка обеспечивает непревзойденную анатомическую поддержку шеи и спины, формируя уединенную зону комфорта.
-    </p>
-
-    <!-- Характеристики / ТТХ (Улучшение) -->
-    <div class="specs-accordion">
-      <div class="specs-trigger" onclick="toggleSpecs()">
-        <span>Характеристики и материалы</span>
-        <span id="arrowIcon">▼</span>
+    <div class="tabs-container">
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('tab-desc', this)">Описание</button>
+        <button class="tab-btn" onclick="switchTab('tab-specs', this)">Характеристики</button>
+        <button class="tab-btn" onclick="switchTab('tab-delivery', this)">Доставка</button>
       </div>
-      <div class="specs-content" id="specsContent">
-        <p><strong>Материал обивки:</strong> Износостойкий мебельный велюр премиум-класса</p>
-        <p><strong>Каркас:</strong> Массив дерева, многослойная березовая фанера</p>
-        <p><strong>Ножки:</strong> Твердые породы дерева, защитное лаковое покрытие</p>
-        <p><strong>Размеры (ВхШхГ):</strong> 101 x 82 x 96 см</p>
+      
+      <div class="tab-panel active" id="tab-desc">
+        <p>Настоящая классика шведского дизайна в эксклюзивном премиальном прочтении GRANDIS GROUP.</p>
+        <p>Высокая закругленная спинка обеспечивает непревзойденную анатомическую поддержку шеи и поясницы, формируя обособленную приватную зону уютного комфорта в вашем доме.</p>
       </div>
-    </div>
-
-    <button class="order-btn">Оформить заказ</button>
-  </div>
-</div>
-
-<script>
-  // Логика переключения тем (Светлая / Темная)
-  function toggleTheme() {
-    const currentTheme = document.body.getAttribute('data-theme');
-    if (currentTheme === 'light') {
-      document.body.removeAttribute('data-theme');
-    } else {
-      document.body.setAttribute('data-theme', 'light');
-    }
-  }
-
-  // Логика выбора цвета с подгрузкой картинок высокого качества
-  const imagesMap = {
-    yellow: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800',
-    grey: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800',
-    emerald: 'https://images.unsplash.com/photo-1598191632318-979ed6818062?w=800'
-  };
-
-  function changeColor(colorName, element) {
-    // Смена активной кнопки
-    document.querySelectorAll('.color-dot-btn').forEach(btn => btn.classList.remove('active'));
-    element.classList.add('active');
-    
-    // Эффект плавного изменения картинки
-    const imgEl = document.getElementById('productMainImg');
-    imgEl.style.opacity = '0.3';
-    setTimeout(() => {
-      imgEl.src = imagesMap[colorName];
-      imgEl.style.opacity = '1';
-    }, 150);
-  }
-
-  // Логика раскрытия характеристик
-  let specsOpen = false;
-  function toggleSpecs() {
-    const content = document.getElementById('specsContent');
-    const arrow = document.getElementById('arrowIcon');
-    specsOpen = !specsOpen;
-    if(specsOpen) {
-      content.style.display = 'block';
-      arrow.textContent = '▲';
-    } else {
-      content.style.display = 'none';
-      arrow.textContent = '▼';
-    }
-  }
-</script>
-</body>
-</html>
+      
+      <div class="tab-panel" id="tab-specs">
+        <p><strong>Материал обивки:</strong> Износостойкий премиум-велюр (Easy Clean)</p>
+        <p><strong>Каркас:</strong> Массив натурального дерева, березовая фанера</p>
+        <p><strong>Ножки:</strong> Бук, покрытие защитным темным лаком</p>
+        <p><strong>
