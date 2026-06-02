@@ -6,7 +6,7 @@
 <title>Кресло STRANDMON Premium | GRANDIS GROUP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2 family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-color: #0d0d0d;
@@ -35,7 +35,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 
   body {
@@ -43,6 +42,7 @@
     color: var(--text-main);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   /* Верхняя панель управления */
@@ -62,24 +62,23 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
-
-  .back-link:hover { opacity: 0.8; }
 
   .theme-toggle {
     background: var(--toggle-btn-bg);
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    padding: 8px 18px;
+    padding: 10px 20px;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-weight: 600;
     cursor: pointer;
     border-radius: 20px;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Контейнер продукта */
@@ -94,6 +93,7 @@
   .gallery-side {
     flex: 1;
     max-width: 550px;
+    width: 100%;
   }
 
   .main-image-wrapper {
@@ -103,7 +103,6 @@
     border-radius: 4px;
     border: 1px solid var(--border-color);
     overflow: hidden;
-    position: relative;
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
   }
 
@@ -111,7 +110,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.15s ease-in-out;
   }
 
   /* Правая сторона: Инфо */
@@ -184,19 +183,20 @@
   }
 
   .color-dot-btn {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
-    position: relative;
     outline: none;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    background: transparent;
   }
 
   .color-dot-btn.active {
     border-color: var(--gold);
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
   .color-dot-btn::after {
@@ -207,10 +207,10 @@
     right: 3px;
     bottom: 3px;
     border-radius: 50%;
-    background: inherit;
+    background: var(--dot-color);
   }
 
-  /* Мощное улучшение: Интерактивные вкладки (Табы) */
+  /* Интерактивные вкладки (Табы) */
   .tabs-container {
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -222,12 +222,12 @@
   .tabs-nav {
     display: flex;
     border-bottom: 1px solid var(--border-color);
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.05);
   }
 
   .tab-btn {
     flex: 1;
-    padding: 15px 10px;
+    padding: 15px 5px;
     background: transparent;
     border: none;
     color: var(--text-muted);
@@ -236,15 +236,17 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
     text-align: center;
+    border-bottom: 2px solid transparent;
   }
 
   .tab-btn.active {
     color: var(--gold);
     background: var(--tab-active-bg);
     font-weight: 700;
-    box-shadow: inset 0 -2px 0 var(--gold);
+    border-bottom: 2px solid var(--gold);
   }
 
   .tab-panel {
@@ -262,6 +264,7 @@
   .tab-panel p {
     margin-bottom: 8px;
   }
+  
   .tab-panel p strong {
     color: var(--text-main);
   }
@@ -281,14 +284,8 @@
     cursor: pointer;
     border-radius: 4px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .order-btn:hover {
-    background: transparent;
-    color: var(--gold);
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   @media (max-width: 900px) {
@@ -298,11 +295,10 @@
       padding-bottom: 60px;
     }
     .gallery-side { max-width: 100%; }
-    .main-image-wrapper { height: 420px; }
+    .main-image-wrapper { height: 400px; }
     .title { font-size: 32px; }
     .order-btn { max-width: 100%; }
-    .tabs-nav { flex-direction: row; }
-    .tab-btn { font-size: 9px; padding: 12px 5px; }
+    .tab-btn { font-size: 10px; }
   }
 </style>
 </head>
@@ -310,16 +306,18 @@
 
 <div class="top-control-bar">
   <a href="index.html" class="back-link">&larr; В КАТАЛОГ</a>
-  <button class="theme-toggle" onclick="toggleTheme()">Сменить режим</button>
+  <button class="theme-toggle" id="themeToggleBtn">Сменить режим</button>
 </div>
 
 <div class="product-container">
+  <!-- Левая сторона: Фото -->
   <div class="gallery-side">
     <div class="main-image-wrapper">
       <img id="productMainImg" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800" alt="STRANDMON">
     </div>
   </div>
   
+  <!-- Правая сторона: Описание и Опции -->
   <div class="info-side">
     <div class="brand-tag">IKEA Premium Collection</div>
     <h1 class="title">Кресло STRANDMON</h1>
@@ -329,29 +327,102 @@
       <div class="stock-status">● В наличии (Минск)</div>
     </div>
     
+    <!-- Переключатель цветов обивки -->
     <div class="color-selector-section">
       <div class="section-label">Выберите цвет обивки:</div>
       <div class="color-options">
-        <button class="color-dot-btn active" style="background: #e5b842;" onclick="changeColor('yellow', this)"></button>
-        <button class="color-dot-btn" style="background: #3a3f47;" onclick="changeColor('grey', this)"></button>
-        <button class="color-dot-btn" style="background: #1c3b32;" onclick="changeColor('emerald', this)"></button>
+        <button class="color-dot-btn active" style="--dot-color: #e5b842;" data-color="yellow"></button>
+        <button class="color-dot-btn" style="--dot-color: #3a3f47;" data-color="grey"></button>
+        <button class="color-dot-btn" style="--dot-color: #1c3b32;" data-color="emerald"></button>
       </div>
     </div>
 
+    <!-- Вкладки с информацией -->
     <div class="tabs-container">
       <div class="tabs-nav">
-        <button class="tab-btn active" onclick="switchTab('tab-desc', this)">Описание</button>
-        <button class="tab-btn" onclick="switchTab('tab-specs', this)">Характеристики</button>
-        <button class="tab-btn" onclick="switchTab('tab-delivery', this)">Доставка</button>
+        <button class="tab-btn active" data-tab="tab-desc">Описание</button>
+        <button class="tab-btn" data-tab="tab-specs">Характеристики</button>
+        <button class="tab-btn" data-tab="tab-delivery">Доставка</button>
       </div>
       
+      <!-- Панель: Описание -->
       <div class="tab-panel active" id="tab-desc">
         <p>Настоящая классика шведского дизайна в эксклюзивном премиальном прочтении GRANDIS GROUP.</p>
         <p>Высокая закругленная спинка обеспечивает непревзойденную анатомическую поддержку шеи и поясницы, формируя обособленную приватную зону уютного комфорта в вашем доме.</p>
       </div>
       
+      <!-- Панель: Характеристики -->
       <div class="tab-panel" id="tab-specs">
         <p><strong>Материал обивки:</strong> Износостойкий премиум-велюр (Easy Clean)</p>
         <p><strong>Каркас:</strong> Массив натурального дерева, березовая фанера</p>
         <p><strong>Ножки:</strong> Бук, покрытие защитным темным лаком</p>
-        <p><strong>
+        <p><strong>Размеры (ВхШхГ):</strong> 101 x 82 x 96 см</p>
+      </div>
+      
+      <!-- Панель: Доставка -->
+      <div class="tab-panel" id="tab-delivery">
+        <p><strong>По Минску:</strong> Бесплатная доставка прямо до квартиры в день заказа при наличии товара.</p>
+        <p><strong>По Беларуси:</strong> Бережная курьерская доставка в течение 1-2 дней.</p>
+        <p><strong>Сборка:</strong> Профессиональная сборка нашими мастерами выполняется сразу при доставке.</p>
+      </div>
+    </div>
+
+    <button class="order-btn">Оформить заказ</button>
+  </div>
+</div>
+
+<script>
+  // 1. Стабильное переключение тем
+  const themeBtn = document.getElementById('themeToggleBtn');
+  themeBtn.addEventListener('click', function() {
+    const isLight = document.body.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      document.body.removeAttribute('data-theme');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+    }
+  });
+
+  // 2. Стабильное переключение цветов обивки
+  const imagesMap = {
+    yellow: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800',
+    grey: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800',
+    emerald: 'https://images.unsplash.com/photo-1598191632318-979ed6818062?w=800'
+  };
+
+  const colorButtons = document.querySelectorAll('.color-dot-btn');
+  const mainImg = document.getElementById('productMainImg');
+
+  colorButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      colorButtons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const color = this.getAttribute('data-color');
+      mainImg.style.opacity = '0.3';
+      
+      // Небольшой таймаут для плавности смены кадров
+      setTimeout(function() {
+        mainImg.src = imagesMap[color];
+        mainImg.style.opacity = '1';
+      }, 100);
+    });
+  });
+
+  // 3. Стабильное переключение вкладок (Табов)
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      
+      this.classList.add('active');
+      const targetTabId = this.getAttribute('data-tab');
+      document.getElementById(targetTabId).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
