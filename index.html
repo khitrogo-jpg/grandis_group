@@ -2,20 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRANDIS GROUP | Эксклюзивная мебель и декор</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GRANDIS GROUP | Эксклюзивный интерактивный каталог</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d0d0d;
-            --panel-bg: #121212;
+            --bg-color: #080808;
+            --panel-bg: rgba(18, 18, 18, 0.85);
             --text-main: #ffffff;
             --text-muted: #aaaaaa;
-            --border-color: rgba(212, 175, 55, 0.15);
+            --border-color: rgba(212, 175, 55, 0.2);
             --gold: #d4af37;
-            --gold-hover: #f3e5ab;
+            --gold-glow: rgba(212, 175, 55, 0.35);
         }
 
         * {
@@ -23,6 +23,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Montserrat', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -31,129 +32,308 @@
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            padding-bottom: 70px;
         }
 
-        /* Шапка сайта */
+        /* --- ШАПКА: ПК ВЕРСИЯ С ИКОНКАМИ В ЦЕНТРЕ --- */
         header {
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
-            background: rgba(13, 13, 13, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(8, 8, 8, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 100;
         }
 
-        .header-container {
-            max-width: 1200px;
+        .header-main-row {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 18px 24px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between; /* На ПК распределяем по краям, но элементы центрированы внутри осей */
+            gap: 30px;
         }
 
-        .logo {
-            font-size: 20px;
+        /* Поиск */
+        .header-search-box {
+            flex: 1;
+            max-width: 320px;
+            position: relative;
+        }
+
+        .header-search-box input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 10px 15px 10px 40px;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header-search-box input:focus {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+
+        .header-search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        /* Блок бренда (Всегда по центру на ПК) */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .logo-globe-icon {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo-container:hover .logo-globe-icon {
+            transform: rotate(360deg); /* Крутая крутящаяся анимация глобуса при наведении */
+        }
+
+        .logo-text {
+            font-size: 18px;
             font-weight: 700;
             letter-spacing: 4px;
             color: var(--text-main);
-            text-decoration: none;
+            text-transform: uppercase;
+            line-height: 1;
         }
 
-        .logo span {
+        .logo-text span {
             color: var(--gold);
+            font-weight: 300;
         }
 
-        /* Главный баннер */
-        .hero {
-            max-width: 1200px;
-            margin: 40px auto 20px auto;
-            padding: 0 20px;
-        }
-
-        .hero-banner {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600') center/cover no-repeat;
-            height: 400px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
+        /* Сервисное меню / Иконки справа */
+        .header-desktop-menu {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 24px;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .header-desktop-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-desktop-menu a:hover {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* Меню категорий в стиле image_5753af.png */
+        .header-nav-row {
+            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            padding: 12px 0;
+            background: rgba(5, 5, 5, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 20px;
+            gap: 35px;
+            list-style: none;
         }
 
-        .hero-banner h1 {
-            font-size: 42px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            padding-bottom: 6px;
+            transition: color 0.3s ease;
         }
 
-        .hero-banner p {
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover, .nav-links .active-nav {
             color: var(--gold);
-            font-size: 14px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
         }
 
-        /* Сетка каталога */
+        .nav-links a:hover::after, .nav-links .active-nav::after {
+            width: 100%;
+        }
+
+        /* --- КАТАЛОГ С ИНТЕРАКТИВНЫМ ПЕРЕЛИСТЫВАНИЕМ КАРТИНОК --- */
         .catalog-section {
             max-width: 1200px;
-            margin: 40px auto 80px auto;
-            padding: 0 20px;
+            margin: 40px auto;
+            padding: 0 24px;
         }
 
         .section-title {
-            font-size: 22px;
-            font-weight: 400;
-            letter-spacing: 2px;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 3px;
             margin-bottom: 30px;
             text-transform: uppercase;
             border-left: 3px solid var(--gold);
-            padding-left: 15px;
+            padding-left: 12px;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1max));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 
-        /* Карточка товара */
+        /* Новая анимированная карточка */
         .product-card {
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
-            border-radius: 4px;
+            border-radius: 8px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                        border-color 0.4s ease, 
+                        box-shadow 0.4s ease;
         }
 
-        .image-container {
+        /* Эффект наведения на карточку */
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px var(--gold-glow);
+        }
+
+        /* Слайдер-галерея внутри карточки */
+        .image-slider-container {
             width: 100%;
             height: 340px;
+            position: relative;
             overflow: hidden;
             background: #000;
         }
 
-        .image-container img {
-            width: 100%;
+        .slider-track {
+            display: flex;
+            width: 300%; /* На 3 картинки */
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slider-track img {
+            width: 33.3333%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
 
-        .product-card:hover .image-container img {
-            transform: scale(1.05);
+        /* Эффект легкого зума картинки при ховере */
+        .product-card:hover .slider-track img {
+            transform: scale(1.03);
         }
 
+        /* Стрелочки перелистывания (Появляются при наведении) */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            background: rgba(8, 8, 8, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+
+        .slider-arrow:hover {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+        }
+
+        .arrow-left { left: 12px; }
+        .arrow-right { right: 12px; }
+
+        .product-card:hover .slider-arrow {
+            opacity: 1;
+        }
+
+        /* Точки-индикаторы слайдов */
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 5;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--gold);
+            width: 18px;
+            border-radius: 3px;
+        }
+
+        /* Описание карточки */
         .card-info {
-            padding: 25px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -169,11 +349,11 @@
         }
 
         .card-title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 400;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            line-height: 1.4;
             letter-spacing: 0.5px;
-            line-height: 1.3;
         }
 
         .card-bottom {
@@ -182,12 +362,13 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 15px;
-            border-top: 1px solid rgba(212, 175, 55, 0.08);
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .card-price {
-            font-size: 20px;
+            font-size: 17px;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .card-link {
@@ -197,40 +378,197 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            border-bottom: 1px solid var(--gold);
-            padding-bottom: 2px;
-            transition: color 0.2s, border-color 0.2s;
-            -webkit-tap-highlight-color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.3s ease;
         }
 
-        .card-link:hover {
+        .card-link span {
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .card-link {
             color: var(--gold);
-            border-color: var(--text-main);
         }
 
-        /* Адаптивность под мобильные */
-        @media (max-width: 768px) {
-            .hero-banner { height: 280px; }
-            .hero-banner h1 { font-size: 28px; }
-            .hero-banner p { font-size: 11px; letter-spacing: 2px; }
-            .products-grid { grid-template-columns: 1fr; }
-            .image-container { height: 300px; }
+        .product-card:hover .card-link span {
+            transform: translateX(5px); /* Анимация вылета стрелочки кнопки */
+        }
+
+        /* --- БАННЕР --- */
+        .hero {
+            max-width: 1200px;
+            margin: 30px auto 10px auto;
+            padding: 0 24px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600') center/cover no-repeat;
+            height: 250px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-banner h1 {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero-banner p {
+            color: var(--gold);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* --- МОБИЛЬНЫЙ ТАБ-BAR (BOTTOM NAV) --- */
+        .bottom-nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(12, 12, 12, 0.96);
+            border-top: 1px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: none;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 999;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .bottom-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            gap: 4px;
+            width: 20%;
+            height: 100%;
+            transition: color 0.3s ease;
+        }
+
+        .bottom-tab.active {
+            color: var(--gold);
+        }
+
+        .bottom-tab-icon {
+            font-size: 18px;
+        }
+
+        /* --- АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ --- */
+        @media (max-width: 950px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .header-main-row { padding: 15px; }
+        }
+
+        @media (max-width: 650px) {
+            .bottom-nav-bar { display: flex; }
+            .header-desktop-menu { display: none; }
+            
+            .header-main-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 15px;
+            }
+            .logo-container {
+                order: 1;
+                justify-content: center;
+                width: 100%;
+            }
+            .header-search-box {
+                order: 2;
+                max-width: 100%;
+                width: 100%;
+            }
+            
+            .header-nav-row {
+                overflow-x: auto;
+                scrollbar-width: none;
+                padding: 10px 0;
+            }
+            .header-nav-row::-webkit-scrollbar { display: none; }
+            .nav-links {
+                justify-content: flex-start;
+                padding: 0 16px;
+                width: max-content;
+                gap: 20px;
+            }
+            .nav-links a { font-size: 11px; padding-bottom: 3px; }
+
+            .products-grid { grid-template-columns: 1fr; gap: 20px; }
+            .image-slider-container { height: 280px; }
+            .hero-banner h1 { font-size: 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ШАПКА -->
     <header>
-        <div class="header-container">
-            <a href="index.html" class="logo">GRANDIS<span>GROUP</span></a>
+        <div class="header-main-row">
+            <!-- Поиск слева -->
+            <div class="header-search-box">
+                <input type="text" placeholder="Поиск эксклюзивной мебели...">
+            </div>
+
+            <!-- Логотип + Глобус по центру -->
+            <a href="index.html" class="logo-container">
+                <svg class="logo-globe-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="46" stroke="#d4af37" stroke-width="3" />
+                    <path d="M12 40C20 35 35 32 45 42C52 49 48 60 40 68C32 76 38 88 48 88" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M52 12C60 22 55 35 68 38C78 40 85 52 75 62C68 69 76 80 88 82" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4" y1="50" x2="96" y2="50" stroke="#d4af37" stroke-width="4"/>
+                </svg>
+                <div class="logo-text">GRANDIS<span>GROUP</span></div>
+            </a>
+
+            <!-- Сервисные ссылки на ПК справа -->
+            <div class="header-desktop-menu">
+                <a href="#" onclick="alert('Кабинет'); return false;">Войти</a>
+                <a href="#" onclick="alert('Статус'); return false;">Статус заказа</a>
+                <a href="#" onclick="alert('Избранное'); return false;">Избранное</a>
+                <a href="#" style="color: var(--gold);" onclick="alert('Корзина'); return false;">🛒 Корзина</a>
+            </div>
+        </div>
+
+        <!-- Навигация Категорий в стиле image_5753af.png -->
+        <div class="header-nav-row">
+            <ul class="nav-links">
+                <li><a href="#" class="active-nav">Все</a></li>
+                <li><a href="#">Гостиная</a></li>
+                <li><a href="#">Спальня</a></li>
+                <li><a href="#">Столовая</a></li>
+                <li><a href="#">Кабинет</a></li>
+                <li><a href="#">Декор</a></li>
+            </ul>
         </div>
     </header>
 
+    <!-- КОНТЕНТ -->
     <main>
         <section class="hero">
             <div class="hero-banner">
-                <h1>Премиальный комфорт</h1>
-                <p>Европейское качество в Минске</p>
+                <h1>Премиум комфорт</h1>
+                <p>Эксклюзивное качество в Минске</p>
             </div>
         </section>
 
@@ -238,48 +576,90 @@
             <h2 class="section-title">Каталог мебели</h2>
             
             <div class="products-grid">
-                <!-- Карточка товара: Кресло STRANDMON -->
-                <div class="product-card">
-                    <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800" alt="Кресло STRANDMON">
+                
+                <!-- Товар 1: Кресло STRANDMON с пролистыванием картинок -->
+                <div class="product-card" id="card-1">
+                    <div class="image-slider-container">
+                        <!-- Кнопки слайдера -->
+                        <div class="slider-arrow arrow-left" onclick="moveSlider('card-1', -1)">&#10094;</div>
+                        <div class="slider-arrow arrow-right" onclick="moveSlider('card-1', 1)">&#10095;</div>
+                        
+                        <!-- Трек с изображениями -->
+                        <div class="slider-track">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800" alt="Кресло ракурс 1">
+                            <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800" alt="Кресло ракурс 2">
+                            <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800" alt="Кресло ракурс 3">
+                        </div>
+
+                        <!-- Индикаторы (точки) -->
+                        <div class="slider-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
                     </div>
                     <div class="card-info">
                         <div class="card-category">Гостиная / Мягкая мебель</div>
-                        <h3 class="card-title">Кресло STRANDMON</h3>
+                        <h3 class="card-title">Эксклюзивное кресло STRANDMON</h3>
                         <div class="card-bottom">
                             <div class="card-price">790 BYN</div>
-                            <!-- Исправленная ссылка для принудительного сброса кэша на смартфонах -->
-                            <a href="product-strandmon.html?v=2" class="card-link">Подробнее</a>
+                            <a href="product-strandmon.html?v=4" class="card-link">Смотреть <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Карточка-заглушка 2 -->
-                <div class="product-card">
-                    <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800" alt="Диван Клауд">
+                <!-- Товар 2: Диван CLOUD с пролистыванием картинок -->
+                <div class="product-card" id="card-2">
+                    <div class="image-slider-container">
+                        <div class="slider-arrow arrow-left" onclick="moveSlider('card-2', -1)">&#10094;</div>
+                        <div class="slider-arrow arrow-right" onclick="moveSlider('card-2', 1)">&#10095;</div>
+                        
+                        <div class="slider-track">
+                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800" alt="Диван ракурс 1">
+                            <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800" alt="Диван ракурс 2">
+                            <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800" alt="Диван ракурс 3">
+                        </div>
+
+                        <div class="slider-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
                     </div>
                     <div class="card-info">
                         <div class="card-category">Гостиная / Диваны</div>
-                        <h3 class="card-title">Диван премиум CLOUD</h3>
+                        <h3 class="card-title">Диван премиум класса CLOUD</h3>
                         <div class="card-bottom">
                             <div class="card-price">2450 BYN</div>
-                            <a href="#" class="card-link" onclick="alert('Эта карточка находится в разработке'); return false;">Подробнее</a>
+                            <a href="#" class="card-link" onclick="alert('В разработке'); return false;">Смотреть <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Карточка-заглушка 3 -->
-                <div class="product-card">
-                    <div class="image-container">
-                        <img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?w=800" alt="Журнальный стол">
+                <!-- Товар 3: Стол MARBLE -->
+                <div class="product-card" id="card-3">
+                    <div class="image-slider-container">
+                        <div class="slider-arrow arrow-left" onclick="moveSlider('card-3', -1)">&#10094;</div>
+                        <div class="slider-arrow arrow-right" onclick="moveSlider('card-3', 1)">&#10095;</div>
+                        
+                        <div class="slider-track">
+                            <img src="https://images.unsplash.com/photo-1581428982868-e410dd047a90?w=800" alt="Стол ракурс 1">
+                            <img src="https://images.unsplash.com/photo-1544207240-8b1025eb7a6c?w=800" alt="Стол ракурс 2">
+                            <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=800" alt="Стол ракурс 3">
+                        </div>
+
+                        <div class="slider-dots">
+                            <div class="dot active"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
                     </div>
                     <div class="card-info">
                         <div class="card-category">Декор / Столы</div>
                         <h3 class="card-title">Стол журнальный MARBLE</h3>
                         <div class="card-bottom">
                             <div class="card-price">420 BYN</div>
-                            <a href="#" class="card-link" onclick="alert('Эта карточка находится в разработке'); return false;">Подробнее</a>
+                            <a href="#" class="card-link" onclick="alert('В разработке'); return false;">Смотреть <span>&rarr;</span></a>
                         </div>
                     </div>
                 </div>
@@ -288,5 +668,68 @@
         </section>
     </main>
 
+    <!-- НИЖНИЙ НАВИГАЦИОННЫЙ БАР ДЛЯ СМАРТФОНОВ -->
+    <nav class="bottom-nav-bar">
+        <a href="#" class="bottom-tab active">
+            <span class="bottom-tab-icon">🏠</span>
+            <span>Главная</span>
+        </a>
+        <a href="#" class="bottom-tab" onclick="document.querySelector('.header-search-box input').focus(); return false;">
+            <span class="bottom-tab-icon">🔍</span>
+            <span>Поиск</span>
+        </a>
+        <a href="#" class="bottom-tab" onclick="alert('Каталог'); return false;">
+            <span class="bottom-tab-icon">📋</span>
+            <span>Каталог</span>
+        </a>
+        <a href="#" class="bottom-tab" onclick="alert('Избранное пусто'); return false;">
+            <span class="bottom-tab-icon">❤️</span>
+            <span>Избранное</span>
+        </a>
+        <a href="#" class="bottom-tab" onclick="alert('Корзина пуста'); return false;">
+            <span class="bottom-tab-icon">🛒</span>
+            <span>Корзина</span>
+        </a>
+    </nav>
+
+    <!-- СКРИПТ ПЕРЕЛИСТЫВАНИЯ СЛАЙДЕРА -->
+    <script>
+        // Объект для хранения текущего индекса картинок каждой карточки
+        const sliderStates = {};
+
+        function moveSlider(cardId, direction) {
+            if (!sliderStates[cardId]) {
+                sliderStates[cardId] = 0;
+            }
+
+            const card = document.getElementById(cardId);
+            const track = card.querySelector('.slider-track');
+            const dots = card.querySelectorAll('.dot');
+            const totalSlides = dots.length;
+
+            // Вычисляем новый индекс
+            sliderStates[cardId] += direction;
+
+            if (sliderStates[cardId] >= totalSlides) {
+                sliderStates[cardId] = 0; // Возврат к первому слайду
+            } else if (sliderStates[cardId] < 0) {
+                sliderStates[cardId] = totalSlides - 1; // Переход к последнему слайду
+            }
+
+            const currentIdx = sliderStates[cardId];
+
+            // Сдвигаем ленту картинок
+            track.style.transform = `translateX(-${currentIdx * 33.3333}%)`;
+
+            // Обновляем активную точку-индикатор
+            dots.forEach((dot, idx) => {
+                if (idx === currentIdx) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
