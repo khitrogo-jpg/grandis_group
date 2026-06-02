@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>GRANDIS GROUP | Next-Gen IKEA Premium</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
 
   header {
     background: #090909;
-    padding: 30px 50px 20px 50px;
+    padding: 30px 20px 20px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,19 +42,20 @@
   }
   .logo-wrapper:hover { transform: scale(1.02); }
   .logo-svg {
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
     filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.1));
   }
 
   .main-nav {
     display: flex;
-    gap: 60px;
+    gap: 40px;
     border-top: 1px solid rgba(212, 175, 55, 0.15);
     width: 100%;
     justify-content: center;
     padding-top: 20px;
     margin-top: 5px;
+    flex-wrap: wrap;
   }
 
   .main-nav a {
@@ -74,10 +75,11 @@
 
   .filter-bar {
     max-width: 1200px;
-    margin: 40px auto 10px auto;
+    margin: 30px auto 10px auto;
     display: flex;
     justify-content: center;
     gap: 15px;
+    padding: 0 20px;
   }
 
   .filter-btn {
@@ -91,6 +93,7 @@
     cursor: pointer;
     border-radius: 20px;
     transition: all 0.3s ease;
+    white-space: nowrap;
   }
 
   .filter-btn.active, .filter-btn:hover {
@@ -104,23 +107,23 @@
     display: flex;
     gap: 30px;
     justify-content: center;
-    padding: 40px 20px 80px 20px;
+    padding: 30px 20px 80px 20px;
     flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
   }
 
-  /* ОБНОВЛЕННАЯ ССЫЛОЧНАЯ КАРТОЧКА */
   .card-link {
     text-decoration: none;
     color: inherit;
+    display: block;
   }
 
   .card {
     background: #121212;
     padding: 20px;
     border-radius: 4px;
-    width: 270px;
+    width: 280px;
     border: 1px solid rgba(212, 175, 55, 0.15);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -137,7 +140,7 @@
 
   .image-container {
     width: 100%;
-    height: 240px;
+    height: 260px;
     position: relative;
     background: #000;
     overflow: hidden;
@@ -234,6 +237,31 @@
     border-top: 1px solid rgba(212, 175, 55, 0.08);
     background: #090909;
   }
+
+  /* МОБИЛЬНАЯ АДАПТАЦИЯ (МЕНЮ И НАВИГАЦИЯ) */
+  @media (max-width: 600px) {
+    .main-nav {
+      gap: 15px;
+      justify-content: space-between;
+      padding: 15px 10px 0 10px;
+    }
+    .main-nav a {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+    .filter-bar {
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+      margin-top: 20px;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .card {
+      width: 100%;
+      max-width: 340px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -257,10 +285,10 @@
   </div>
   
   <div class="main-nav">
-    <a href="#" class="active">КАТАЛОГ</a>
-    <a href="#">НОВИНКИ</a>
-    <a href="#">О НАС</a>
-    <a href="#">КОНТАКТЫ</a>
+    <a href="#" class="active">Каталог</a>
+    <a href="#">Новинки</a>
+    <a href="#">О нас</a>
+    <a href="#">Контакты</a>
   </div>
 </header>
 
@@ -272,7 +300,6 @@
 
 <div class="products">
   
-  <!-- ТОВАР 1: КРЕСЛО STRANDMON (ССЫЛКА НА ОТДЕЛЬНУЮ СТРАНИЦУ) -->
   <a href="product-strandmon.html" class="card-link" data-category="living">
     <div class="card" onmouseenter="startSlider(this)" onmouseleave="stopSlider(this)">
       <div class="image-container">
@@ -287,7 +314,6 @@
     </div>
   </a>
 
-  <!-- ТОВАР 2: КРОВАТЬ MALM -->
   <div class="card" data-category="bedroom" onmouseenter="startSlider(this)" onmouseleave="stopSlider(this)">
     <div class="image-container">
       <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=500" class="slide-img active">
@@ -303,7 +329,7 @@
 </div>
 
 <footer>
-  &copy; 2026 GRANDIS GROUP. ALL RIGHTS RESERVED. БЕЗ ЗОЛОТЫХ ЭЛЕМЕНТОВ В ОРНАМЕНТАХ МЕБЕЛИ.
+  &copy; 2026 GRANDIS GROUP. ALL RIGHTS RESERVED.
 </footer>
 
 <script>
@@ -334,7 +360,7 @@
     btn.classList.add('active');
     document.querySelectorAll('.card, .card-link').forEach(el => {
       const c = el.getAttribute('data-category');
-      if(cat === 'all' || c === cat) el.style.display = 'flex';
+      if(cat === 'all' || c === cat) el.style.display = 'block';
       else el.style.display = 'none';
     });
   }
