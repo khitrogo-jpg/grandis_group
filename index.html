@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRANDIS GROUP | Next-Gen IKEA Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  body {
+    background-color: #0d0d0d;
+    background-image: 
+      radial-gradient(circle at 15% 15%, transparent 79%, rgba(212, 175, 55, 0.05) 80%, transparent 81%),
+      radial-gradient(circle at 85% 30%, transparent 69%, rgba(212, 175, 55, 0.03) 70%, transparent 72%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    background: #090909;
+    padding: 30px 50px 20px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  }
+
+  .logo-wrapper {
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .logo-wrapper:hover { transform: scale(1.02); }
+  .logo-svg {
+    width: 130px;
+    height: 130px;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.1));
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 60px;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    width: 100%;
+    justify-content: center;
+    padding-top: 20px;
+    margin-top: 5px;
+  }
+
+  .main-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    font-weight: 600;
+  }
+
+  .main-nav a:hover, .main-nav a.active {
+    color: #d4af37;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+
+  .filter-bar {
+    max-width: 1200px;
+    margin: 40px auto 10px auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: #ffffff;
+    padding: 10px 24px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: #d4af37;
+    color: #000000;
+    border-color: #d4af37;
+    font-weight: 700;
+  }
+
+  .products {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    padding: 40px 20px 80px 20px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ОБНОВЛЕННАЯ ССЫЛОЧНАЯ КАРТОЧКА */
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card {
+    background: #121212;
+    padding: 20px;
+    border-radius: 4px;
+    width: 270px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: #d4af37;
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+  }
+
+  .image-container {
+    width: 100%;
+    height: 240px;
+    position: relative;
+    background: #000;
+    overflow: hidden;
+    border-radius: 2px;
+    margin-bottom: 15px;
+  }
+
+  .slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .slide-img.active { opacity: 1; }
+
+  .slider-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+  }
+
+  .dot.active {
+    background: #d4af37;
+    box-shadow: 0 0 5px #d4af37;
+  }
+
+  .product-brand {
+    font-size: 0.75rem;
+    color: #d4af37;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+
+  .price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+    margin-top: auto;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  button:hover {
+    background: #d4af37;
+    color: #000000;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #555555;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(212, 175, 55, 0.08);
+    background: #090909;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrapper">
+    <svg class="logo-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f5e49e" />
+          <stop offset="50%" stop-color="#d4af37" />
+          <stop offset="100%" stop-color="#967315" />
+        </linearGradient>
+      </defs>
+      <circle cx="250" cy="250" r="200" fill="url(#goldGrad)" />
+      <path d="M 150 170 C 140 180, 130 190, 120 180 C 110 170, 125 155, 135 150 C 145 130, 160 115, 180 120 C 200 110, 210 125, 230 120 C 240 125, 250 110, 265 115 C 280 130, 290 120, 310 140 C 330 135, 340 150, 360 160 C 345 180, 350 200, 330 215 C 310 230, 315 250, 290 260 L 140 260 Z" fill="#0b0b0b" />
+      <path d="M 170 300 L 370 300 C 360 320, 365 340, 350 360 C 330 380, 335 410, 300 420 C 280 430, 270 410, 250 440 C 235 430, 220 390, 210 380 C 190 380, 180 340, 170 300 Z" fill="#0b0b0b" />
+      <rect x="30" y="235" width="440" height="60" fill="#0b0b0b" />
+      <text x="250" y="276" fill="url(#goldGrad)" font-family="'Cinzel', serif" font-size="34" font-weight="700" letter-spacing="3" text-anchor="middle">GRANDIS GROUP</text>
+    </svg>
+  </div>
+  
+  <div class="main-nav">
+    <a href="#" class="active">КАТАЛОГ</a>
+    <a href="#">НОВИНКИ</a>
+    <a href="#">О НАС</a>
+    <a href="#">КОНТАКТЫ</a>
+  </div>
+</header>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCat('all', this)">Все товары</button>
+  <button class="filter-btn" onclick="filterCat('living', this)">Гостиная</button>
+  <button class="filter-btn" onclick="filterCat('bedroom', this)">Спальня</button>
+</div>
+
+<div class="products">
+  
+  <!-- ТОВАР 1: КРЕСЛО STRANDMON (ССЫЛКА НА ОТДЕЛЬНУЮ СТРАНИЦУ) -->
+  <a href="product-strandmon.html" class="card-link" data-category="living">
+    <div class="card" onmouseenter="startSlider(this)" onmouseleave="stopSlider(this)">
+      <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500" class="slide-img active">
+        <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=500" class="slide-img">
+        <div class="slider-dots"><div class="dot active"></div><div class="dot"></div></div>
+      </div>
+      <div class="product-brand">IKEA Premium</div>
+      <div class="product-title">Кресло STRANDMON</div>
+      <div class="price">€219</div>
+      <button>ПОДРОБНЕЕ</button>
+    </div>
+  </a>
+
+  <!-- ТОВАР 2: КРОВАТЬ MALM -->
+  <div class="card" data-category="bedroom" onmouseenter="startSlider(this)" onmouseleave="stopSlider(this)">
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=500" class="slide-img active">
+      <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=500" class="slide-img">
+      <div class="slider-dots"><div class="dot active"></div><div class="dot"></div></div>
+    </div>
+    <div class="product-brand">IKEA Premium</div>
+    <div class="product-title">Кровать MALM</div>
+    <div class="price">€489</div>
+    <button>ПОДРОБНЕЕ</button>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 GRANDIS GROUP. ALL RIGHTS RESERVED. БЕЗ ЗОЛОТЫХ ЭЛЕМЕНТОВ В ОРНАМЕНТАХ МЕБЕЛИ.
+</footer>
+
+<script>
+  let intervals = new Map();
+
+  function startSlider(card) {
+    const imgs = card.querySelectorAll('.slide-img');
+    const dots = card.querySelectorAll('.dot');
+    if(imgs.length <= 1) return;
+    let idx = 0;
+    intervals.set(card, setInterval(() => {
+      imgs[idx].classList.remove('active');
+      dots[idx].classList.remove('active');
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add('active');
+      dots[idx].classList.add('active');
+    }, 1200));
+  }
+
+  function stopSlider(card) {
+    clearInterval(intervals.get(card));
+    card.querySelectorAll('.slide-img').forEach((img, i) => i===0 ? img.classList.add('active') : img.classList.remove('active'));
+    card.querySelectorAll('.dot').forEach((d, i) => i===0 ? d.classList.add('active') : d.classList.remove('active'));
+  }
+
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card, .card-link').forEach(el => {
+      const c = el.getAttribute('data-category');
+      if(cat === 'all' || c === cat) el.style.display = 'flex';
+      else el.style.display = 'none';
+    });
+  }
+</script>
+</body>
+</html>
