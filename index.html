@@ -3,392 +3,365 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Кресло STRANDMON Premium | GRANDIS GROUP</title>
+<title>GRANDIS GROUP | Next-Gen IKEA Premium</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg-color: #0d0d0d;
-    --panel-bg: #121212;
-    --text-main: #ffffff;
-    --text-muted: #aaaaaa;
-    --border-color: rgba(212, 175, 55, 0.15);
-    --gold: #d4af37;
-    --toggle-btn-bg: #1a1a1a;
-  }
-
-  [data-theme="light"] {
-    --bg-color: #fcfcfc;
-    --panel-bg: #ffffff;
-    --text-main: #1a1a1a;
-    --text-muted: #666666;
-    --border-color: rgba(26, 26, 26, 0.1);
-    --gold: #b38f1d;
-    --toggle-btn-bg: #eaeaea;
-  }
-
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 
   body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
+    background-color: #0d0d0d;
+    background-image: 
+      radial-gradient(circle at 15% 15%, transparent 79%, rgba(212, 175, 55, 0.05) 80%, transparent 81%),
+      radial-gradient(circle at 85% 30%, transparent 69%, rgba(212, 175, 55, 0.03) 70%, transparent 72%);
+    color: #ffffff;
     min-height: 100vh;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Верхняя панель управления */
-  .top-control-bar {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 25px 20px 10px 20px;
+  header {
+    background: #090909;
+    padding: 30px 20px 20px 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
   }
 
-  .back-link {
-    color: var(--gold);
+  .logo-wrapper {
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .logo-wrapper:hover { transform: scale(1.02); }
+  .logo-svg {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.1));
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 40px;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    width: 100%;
+    justify-content: center;
+    padding-top: 20px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+  }
+
+  .main-nav a {
+    color: #ffffff;
     text-decoration: none;
-    font-size: 11px;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+    transition: all 0.3s;
     font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
   }
 
-  .theme-toggle {
-    background: var(--toggle-btn-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 8px 16px;
-    font-size: 10px;
+  .main-nav a:hover, .main-nav a.active {
+    color: #d4af37;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+
+  .filter-bar {
+    max-width: 1200px;
+    margin: 30px auto 10px auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 0 20px;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: #ffffff;
+    padding: 10px 24px;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-weight: 600;
     cursor: pointer;
     border-radius: 20px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
   }
 
-  /* Контейнер продукта */
-  .product-container {
+  .filter-btn.active, .filter-btn:hover {
+    background: #d4af37;
+    color: #000000;
+    border-color: #d4af37;
+    font-weight: 700;
+  }
+
+  .products {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    padding: 30px 20px 80px 20px;
+    flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px 20px 80px 20px;
-    display: flex;
-    gap: 60px;
   }
 
-  .gallery-side {
-    flex: 1;
-    max-width: 550px;
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
 
-  .main-image-wrapper {
-    width: 100%;
-    height: 580px;
-    background: #000;
+  .card {
+    background: #121212;
+    padding: 20px;
     border-radius: 4px;
-    border: 1px solid var(--border-color);
-    overflow: hidden;
+    width: 280px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
     position: relative;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
   }
 
-  .main-image-wrapper img {
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: #d4af37;
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+  }
+
+  .image-container {
+    width: 100%;
+    height: 260px;
+    position: relative;
+    background: #000;
+    overflow: hidden;
+    border-radius: 2px;
+    margin-bottom: 15px;
+  }
+
+  .slide-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
   }
 
-  /* Правая сторона: Инфо */
-  .info-side {
-    flex: 1;
+  .slide-img.active { opacity: 1; }
+
+  .slider-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 6px;
   }
 
-  .brand-tag {
-    font-size: 11px;
+  .dot {
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+  }
+
+  .dot.active {
+    background: #d4af37;
+    box-shadow: 0 0 5px #d4af37;
+  }
+
+  .product-brand {
+    font-size: 0.75rem;
+    color: #d4af37;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--gold);
-    margin-bottom: 12px;
+    margin-bottom: 5px;
+    letter-spacing: 1.5px;
     font-weight: 600;
   }
 
-  .title {
-    font-size: 40px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    line-height: 1.2;
-  }
-
-  .meta-status-row {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
+  .product-title {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-weight: 400;
   }
 
   .price {
-    font-size: 30px;
+    font-size: 1.2rem;
     font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+    margin-top: auto;
   }
 
-  .stock-status {
-    font-size: 12px;
-    color: #2ec4b6;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    background: rgba(46, 196, 182, 0.1);
-    padding: 4px 10px;
-    border-radius: 4px;
-  }
-
-  /* Селектор Цвета */
-  .color-selector-section {
-    margin-bottom: 30px;
-    padding: 20px 0;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .section-label {
+  button {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #d4af37;
+    color: #d4af37;
     font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    font-weight: 600;
-  }
-
-  .color-options {
-    display: flex;
-    gap: 15px;
-  }
-
-  .color-dot-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 2px solid transparent;
     cursor: pointer;
-    position: relative;
-    outline: none;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    border-radius: 2px;
+    transition: all 0.3s ease;
   }
 
-  .color-dot-btn.active {
-    border-color: var(--gold);
-    transform: scale(1.1);
-  }
-
-  .color-dot-btn::after {
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    right: 3px;
-    bottom: 3px;
-    border-radius: 50%;
-    background: inherit;
-  }
-
-  .desc-text {
-    font-size: 14px;
-    line-height: 1.8;
-    color: var(--text-muted);
-    margin-bottom: 30px;
-  }
-
-  /* Выпадающие характеристики (Улучшение) */
-  .specs-accordion {
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    margin-bottom: 35px;
-    background: var(--panel-bg);
-  }
-
-  .specs-trigger {
-    padding: 15px 20px;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-  }
-
-  .specs-content {
-    padding: 0 20px 20px 20px;
-    display: none;
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    border-top: 1px solid var(--border-color);
-    padding-top: 15px;
-  }
-
-  .specs-content p {
-    margin-bottom: 6px;
-  }
-
-  /* Премиум кнопка действия */
-  .order-btn {
-    width: 100%;
-    max-width: 380px;
-    padding: 18px;
-    background: var(--gold);
-    border: 1px solid var(--gold);
+  button:hover {
+    background: #d4af37;
     color: #000000;
-    font-size: 12px;
-    font-weight: 700;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #555555;
+    font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    cursor: pointer;
-    border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    border-top: 1px solid rgba(212, 175, 55, 0.08);
+    background: #090909;
   }
 
-  .order-btn:hover {
-    background: transparent;
-    color: var(--gold);
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
-  }
-
-  @media (max-width: 900px) {
-    .product-container {
-      flex-direction: column;
-      gap: 35px;
-      padding-bottom: 60px;
+  @media (max-width: 600px) {
+    .main-nav {
+      gap: 15px;
+      justify-content: space-between;
+      padding: 15px 10px 0 10px;
     }
-    .gallery-side { max-width: 100%; }
-    .main-image-wrapper { height: 420px; }
-    .title { font-size: 30px; }
-    .order-btn { max-width: 100%; }
+    .main-nav a {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+    .filter-bar {
+      justify-content: flex-start;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+      margin-top: 20px;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .card {
+      width: 100%;
+      max-width: 340px;
+    }
   }
 </style>
 </head>
 <body>
 
-<div class="top-control-bar">
-  <a href="index.html" class="back-link">&larr; В КАТАЛОГ</a>
-  <button class="theme-toggle" onclick="toggleTheme()">Режим</button>
-</div>
-
-<div class="product-container">
-  <!-- Левая сторона: Галерея -->
-  <div class="gallery-side">
-    <div class="main-image-wrapper">
-      <img id="productMainImg" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800" alt="STRANDMON">
-    </div>
+<header>
+  <div class="logo-wrapper">
+    <svg class="logo-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f5e49e" />
+          <stop offset="50%" stop-color="#d4af37" />
+          <stop offset="100%" stop-color="#967315" />
+        </linearGradient>
+      </defs>
+      <circle cx="250" cy="250" r="200" fill="url(#goldGrad)" />
+      <path d="M 150 170 C 140 180, 130 190, 120 180 C 110 170, 125 155, 135 150 C 145 130, 160 115, 180 120 C 200 110, 210 125, 230 120 C 240 125, 250 110, 265 115 C 280 130, 290 120, 310 140 C 330 135, 340 150, 360 160 C 345 180, 350 200, 330 215 C 310 230, 315 250, 290 260 L 140 260 Z" fill="#0b0b0b" />
+      <path d="M 170 300 L 370 300 C 360 320, 365 340, 350 360 C 330 380, 335 410, 300 420 C 280 430, 270 410, 250 440 C 235 430, 220 390, 210 380 C 190 380, 180 340, 170 300 Z" fill="#0b0b0b" />
+      <rect x="30" y="235" width="440" height="60" fill="#0b0b0b" />
+      <text x="250" y="276" fill="url(#goldGrad)" font-family="'Cinzel', serif" font-size="34" font-weight="700" letter-spacing="3" text-anchor="middle">GRANDIS GROUP</text>
+    </svg>
   </div>
   
-  <!-- Правая сторона: Детали -->
-  <div class="info-side">
-    <div class="brand-tag">IKEA Premium Collection</div>
-    <h1 class="title">Кресло STRANDMON</h1>
-    
-    <div class="meta-status-row">
-      <div class="price">790 BYN</div>
-      <div class="stock-status">● В наличии (Минск)</div>
-    </div>
-    
-    <!-- Переключатель цветов -->
-    <div class="color-selector-section">
-      <div class="section-label">Выберите цвет обивки:</div>
-      <div class="color-options">
-        <!-- Желтый -->
-        <button class="color-dot-btn active" style="background: #e5b842;" onclick="changeColor('yellow', this)"></button>
-        <!-- Темно-серый -->
-        <button class="color-dot-btn" style="background: #3a3f47;" onclick="changeColor('grey', this)"></button>
-        <!-- Премиальный Изумруд -->
-        <button class="color-dot-btn" style="background: #1c3b32;" onclick="changeColor('emerald', this)"></button>
-      </div>
-    </div>
-
-    <p class="desc-text">
-      Настоящая классика шведского дизайна в эксклюзивном премиальном прочтении GRANDIS GROUP. Высокая закругленная спинка обеспечивает непревзойденную анатомическую поддержку шеи и спины, формируя уединенную зону комфорта.
-    </p>
-
-    <!-- Характеристики / ТТХ (Улучшение) -->
-    <div class="specs-accordion">
-      <div class="specs-trigger" onclick="toggleSpecs()">
-        <span>Характеристики и материалы</span>
-        <span id="arrowIcon">▼</span>
-      </div>
-      <div class="specs-content" id="specsContent">
-        <p><strong>Материал обивки:</strong> Износостойкий мебельный велюр премиум-класса</p>
-        <p><strong>Каркас:</strong> Массив дерева, многослойная березовая фанера</p>
-        <p><strong>Ножки:</strong> Твердые породы дерева, защитное лаковое покрытие</p>
-        <p><strong>Размеры (ВхШхГ):</strong> 101 x 82 x 96 см</p>
-      </div>
-    </div>
-
-    <button class="order-btn">Оформить заказ</button>
+  <div class="main-nav">
+    <a href="#" class="active">Каталог</a>
+    <a href="#">Новинки</a>
+    <a href="#">О нас</a>
+    <a href="#">Контакты</a>
   </div>
+</header>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCat('all', this)">Все товары</button>
+  <button class="filter-btn" onclick="filterCat('living', this)">Гостиная</button>
+  <button class="filter-btn" onclick="filterCat('bedroom', this)">Спальня</button>
 </div>
 
+<div class="products">
+  
+  <a href="product-strandmon.html" class="card-link" data-category="living">
+    <div class="card" onmouseenter="startSlider(this)" onmouseleave="stopSlider(this)">
+      <div class="image-container">
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500" class="slide-img active">
+        <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=500" class="slide-img">
+        <div class="slider-dots"><div class="dot active"></div><div class="dot"></div></div>
+      </div>
+      <div class="product-brand">IKEA Premium</div>
+      <div class="product-title">Кресло STRANDMON</div>
+      <div class="price">790 BYN</div>
+      <button>ПОДРОБНЕЕ</button>
+    </div>
+  </a>
+
+  <div class="card" data-category="bedroom" onmouseenter="startSlider(this)" onmouseleave="stopSlider(this)">
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=500" class="slide-img active">
+      <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=500" class="slide-img">
+      <div class="slider-dots"><div class="dot active"></div><div class="dot"></div></div>
+    </div>
+    <div class="product-brand">IKEA Premium</div>
+    <div class="product-title">Кровать MALM</div>
+    <div class="price">1 750 BYN</div>
+    <button>ПОДРОБНЕЕ</button>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 GRANDIS GROUP. ALL RIGHTS RESERVED.
+</footer>
+
 <script>
-  // Логика переключения тем (Светлая / Темная)
-  function toggleTheme() {
-    const currentTheme = document.body.getAttribute('data-theme');
-    if (currentTheme === 'light') {
-      document.body.removeAttribute('data-theme');
-    } else {
-      document.body.setAttribute('data-theme', 'light');
-    }
+  let intervals = new Map();
+
+  function startSlider(card) {
+    const imgs = card.querySelectorAll('.slide-img');
+    const dots = card.querySelectorAll('.dot');
+    if(imgs.length <= 1) return;
+    let idx = 0;
+    intervals.set(card, setInterval(() => {
+      imgs[idx].classList.remove('active');
+      dots[idx].classList.remove('active');
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add('active');
+      dots[idx].classList.add('active');
+    }, 1200));
   }
 
-  // Логика выбора цвета с подгрузкой картинок высокого качества
-  const imagesMap = {
-    yellow: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800',
-    grey: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800',
-    emerald: 'https://images.unsplash.com/photo-1598191632318-979ed6818062?w=800'
-  };
-
-  function changeColor(colorName, element) {
-    // Смена активной кнопки
-    document.querySelectorAll('.color-dot-btn').forEach(btn => btn.classList.remove('active'));
-    element.classList.add('active');
-    
-    // Эффект плавного изменения картинки
-    const imgEl = document.getElementById('productMainImg');
-    imgEl.style.opacity = '0.3';
-    setTimeout(() => {
-      imgEl.src = imagesMap[colorName];
-      imgEl.style.opacity = '1';
-    }, 150);
+  function stopSlider(card) {
+    clearInterval(intervals.get(card));
+    card.querySelectorAll('.slide-img').forEach((img, i) => i===0 ? img.classList.add('active') : img.classList.remove('active'));
+    card.querySelectorAll('.dot').forEach((d, i) => i===0 ? d.classList.add('active') : d.classList.remove('active'));
   }
 
-  // Логика раскрытия характеристик
-  let specsOpen = false;
-  function toggleSpecs() {
-    const content = document.getElementById('specsContent');
-    const arrow = document.getElementById('arrowIcon');
-    specsOpen = !specsOpen;
-    if(specsOpen) {
-      content.style.display = 'block';
-      arrow.textContent = '▲';
-    } else {
-      content.style.display = 'none';
-      arrow.textContent = '▼';
-    }
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card, .card-link').forEach(el => {
+      const c = el.getAttribute('data-category');
+      if(cat === 'all' || c === cat) el.style.display = 'block';
+      else el.style.display = 'none';
+    });
   }
 </script>
 </body>
